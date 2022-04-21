@@ -5,7 +5,7 @@
                 <input type="file" @change="processFile($event)">
             </div>
             <div class="mt-3">
-                <input type="checkbox" v-model="saveToDatebase"> Save to Database
+                <input type="checkbox" v-model="saveToDatabase"> Save to Database
 
             </div>
             <div class="mt-3">
@@ -48,7 +48,7 @@ export default {
     data() {
         return {
             file: '',
-            saveToDatebase: false,
+            saveToDatabase: false,
             averagePrice: '',
             totalHousesSold: '',
             numberOfCrimes: '',
@@ -65,21 +65,21 @@ export default {
             if (this.timeout) {
                 alert('please wait...')
             } else {
-                this.timeout=true;
+                this.timeout = true;
 
                 let form = new FormData();
                 form.append('file', this.file);
-                form.append('save_to_database', this.saveToDatebase)
+                form.append('save_to_database', this.saveToDatabase)
                 axios.post('/upload-data', form).then((data) => {
                     this.averagePrice = data.data.average_price;
                     this.totalHousesSold = data.data.total_houses_sold;
                     this.numberOfCrimes = data.data.number_of_crimes;
                     this.averagePricePerYear = data.data.average_price_per_year
-                    this.timeout=false;
+                    this.timeout = false;
 
                 }).catch(() => {
                     alert('error');
-                    this.timeout=false;
+                    this.timeout = false;
 
 
                 })

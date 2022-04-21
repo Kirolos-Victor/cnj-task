@@ -25,7 +25,7 @@ class FileService
             ]);
         }
 
-        return $data;
+        return response()->json($data);
     }
 
 }

@@ -17,11 +17,8 @@ class UploadController extends Controller
         return view('upload');
     }
 
-    public function uploadData(FileRequest $request,FileService $fileService)
+    public function uploadData(FileRequest $request, FileService $fileService)
     {
-        $data=$fileService->execute($request);
-
-
-        return response()->json($data);
+        return $fileService->execute($request);
     }
 }

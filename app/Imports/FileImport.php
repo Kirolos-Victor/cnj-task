@@ -29,24 +29,22 @@ class FileImport implements ToCollection, WithHeadingRow
 
         $averagePricePerYear = [];
         foreach ($dataOfLondonCity as $key => $data) {
-            $totalPricePerYear=0;
+            $totalPricePerYear = 0;
 
             for ($i = 0; $i < count($dataOfLondonCity); $i += 12) {
-                if ($i ==$key)
-                {
+                if ($i == $key) {
                     $currentYear = substr($data['date'], 0, 4);
 
-                    $totalPricePerYear +=$data['average_price'];
-                    $averagePricePerYear[$currentYear]=$totalPricePerYear;
-
+                    $totalPricePerYear += $data['average_price'];
+                    $averagePricePerYear[$currentYear] = $totalPricePerYear;
                 }
-           }
+            }
         }
         $data = [
             'average_price' => $totalPrice,
             'total_houses_sold' => $totalHousesSold,
             'number_of_crimes' => $totalNumberOfCrimes,
-            'average_price_per_year'=>$averagePricePerYear
+            'average_price_per_year' => $averagePricePerYear
         ];
 
         Session::put('fileData', $data);
